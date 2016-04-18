@@ -2,6 +2,6 @@
 
 Initial project summary:
 
-I'm planning on simulating a deck of cards using a linked list. The initial setup will probably look much like the CommunicationNetwork assignment; there will be methods to build the deck, overhand shuffle, riffle shuffle, print the deck, find a card, and pick a random card. Beyond that, I can implement a number of different chance card games like War, as well as games like Blackjack with a simple engine.
+I'm planning on simulating a deck of cards using an array. TThere will be methods to build the deck, overhand shuffle, riffle shuffle, print the deck, find a card, and pick a random card. Beyond that, I can implement a number of different chance card games like War, as well as games like Blackjack with a simple engine.
 
-The reason for using a linked list is that it seems to be the most easily manipulatable collection. An array would work, seeing as there's always 52 cards in the deck; however, the constant size might be an issue when making card games and removing from the middle of the deck is much easier with a linked list. A stack might work (seeing as it's a stack of cards), but that makes options very limited for getting cards from the middle of the deck.
+The reason for using an array is that the deck of cards itself is a static size (52 cards), so there's no need for the resizability of a linked list or vector. A more flexible data structure could be helpful for representing sets of cards with changing size (e.g. dealt cards), but an array is fine for keeping track of the entire deck.  
