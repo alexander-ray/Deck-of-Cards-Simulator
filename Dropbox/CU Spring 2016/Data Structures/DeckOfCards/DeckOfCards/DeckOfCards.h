@@ -40,7 +40,10 @@ class DeckOfCards {
         DeckOfCards();
         ~DeckOfCards();
         void printDeck();
+        Card* pickRandomCard();
+        Card* pickCardFromPosition(int pos);
     private:
+        int deckSize = 52;
         void buildDeck();
         Card* deck[52];
 };

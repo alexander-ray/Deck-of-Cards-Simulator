@@ -12,5 +12,6 @@ using namespace std;
 int main() {
     DeckOfCards *deck = new DeckOfCards();
 
-    deck->printDeck();
+    Card *tmp = deck->pickRandomCard();
+    cout << tmp->suit << "  " << tmp->name << endl;
 }

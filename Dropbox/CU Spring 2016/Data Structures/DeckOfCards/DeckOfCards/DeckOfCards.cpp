@@ -1,6 +1,8 @@
 #include "DeckOfCards.h"
 #include <iostream>
+#include <cstdlib>
 #include <string>
+#include <random>
 
 using namespace std;
 
@@ -17,6 +19,13 @@ void DeckOfCards::printDeck() {
     for (int i = 0; i < 52; i++) {
         cout << deck[i]->suit << "  " << deck[i]->name << endl;
     }
+}
+
+// Pick random card
+Card* DeckOfCards::pickRandomCard() {
+    srand(time(NULL)); // Seeding rand()
+    int randNum = rand()%(deckSize + 1); // Getting random number between 0 and 52
+    return deck[randNum];
 }
 
 // Build ordered Deck
