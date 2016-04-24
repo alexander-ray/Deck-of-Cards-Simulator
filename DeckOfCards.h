@@ -40,8 +40,11 @@ class DeckOfCards {
         DeckOfCards();
         ~DeckOfCards();
         void printDeck();
+        void rebuildDeck();
+        void perfectShuffle();
         Card* pickRandomCard();
         Card* pickCardFromPosition(int pos);
+        Card* getCard(string name, string suit);
     private:
         int deckSize = 52;
         void buildDeck();

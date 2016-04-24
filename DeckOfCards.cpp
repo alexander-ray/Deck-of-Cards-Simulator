@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <string>
 #include <random>
+#include <algorithm>
 
 using namespace std;
 
@@ -21,11 +22,26 @@ void DeckOfCards::printDeck() {
     }
 }
 
+// Pick specified card
+Card* DeckOfCards::pickCardFromPosition(int pos) {
+    return deck[pos];
+}
+
 // Pick random card
 Card* DeckOfCards::pickRandomCard() {
     srand(time(NULL)); // Seeding rand()
-    int randNum = rand()%(deckSize + 1); // Getting random number between 0 and 52
+    int randNum = rand()%(deckSize + 1); // Getting random number between 0 and 51
     return deck[randNum];
+}
+
+void DeckOfCards::perfectShuffle() {
+    random_shuffle(deck, deck+52);
+}
+
+void DeckOfCards::rebuildDeck() {
+    for (int i = 0; i < deckSize; i++)
+        delete deck[i];
+    buildDeck();
 }
 
 // Build ordered Deck
