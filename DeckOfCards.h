@@ -43,6 +43,7 @@ class DeckOfCards {
         void printDeck();
         void rebuildDeck();
         void perfectShuffle();
+        void riffleShuffle();
         Card* pickRandomCard();
         Card* pickCardFromPosition(int pos);
         Card* getCard(string name, string suit);

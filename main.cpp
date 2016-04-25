@@ -22,12 +22,13 @@ int main() {
         cout << "======Main Menu======" << endl;
         cout << "1. Print deck" << endl;
         cout << "2. Perfectly shuffle deck" << endl;
-        cout << "3. Pick random card" << endl;
-        cout << "4. Choose card from specified position" << endl;
-        cout << "5. Get specified card from deck" << endl;
-        cout << "6. Deal cards" << endl;
-        cout << "7. Return deck to original state" << endl;
-        cout << "8. Quit" << endl;
+        cout << "3. Riffle shuffle" << endl;
+        cout << "4. Pick random card" << endl;
+        cout << "5. Choose card from specified position" << endl;
+        cout << "6. Get specified card from deck" << endl;
+        cout << "7. Deal cards" << endl;
+        cout << "8. Return deck to original state" << endl;
+        cout << "9. Quit" << endl;
         cin >> input;
 
         if (input == 1) {
@@ -37,10 +38,13 @@ int main() {
             deck->perfectShuffle();
         }
         else if (input == 3) {
+            deck->riffleShuffle();
+        }
+        else if (input == 4) {
             Card *tmp = deck->pickRandomCard();
             cout << "You got: " << tmp->name << " of " << tmp->suit << "s!" << endl;
         }
-        else if (input == 4) {
+        else if (input == 5) {
             int pos;
             string posString;
             cin.ignore();
@@ -58,7 +62,7 @@ int main() {
             Card *tmp = deck->pickCardFromPosition(pos - 1);
             cout << "You picked: " << tmp->name << " of " << tmp->suit << "s!" << endl;
         }
-        else if (input == 5) {
+        else if (input == 6) {
             string name;
             string suit;
 
@@ -80,7 +84,7 @@ int main() {
             else
                 cout << "Card not found!" << endl;
         }
-        else if (input == 6) {
+        else if (input == 7) {
             int num;
             string numString;
             cin.ignore();
@@ -106,13 +110,12 @@ int main() {
                 counter++;
             }
         }
-        else if (input == 7) {
+        else if (input == 8) {
             deck->rebuildDeck();
         }
         else
             cout << "Goodbye!" << endl;
     }
-    while (input != 8);
-    return 0;
+    while (input != 9);
 }
 

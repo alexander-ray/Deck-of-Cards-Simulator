@@ -66,6 +66,21 @@ void DeckOfCards::perfectShuffle() {
     random_shuffle(deck, deck+52);
 }
 
+// Simulates the classic riffle shuffle
+void DeckOfCards::riffleShuffle() {
+    Card *tmp[deckSize];
+    int counter = 0;
+    for (int i = 0; i < deckSize / 2; i++) {    
+        tmp[counter] = deck[i];
+        tmp[counter+1] = deck[i + 26];
+        counter = counter + 2;
+    }
+
+    // Copying tmp to deck
+    for (int i = 0; i < deckSize; i++)
+        deck[i] = tmp[i];
+}
+
 // First element of deck becomes last element
 // Deck shifts forward by 1
 void DeckOfCards::shiftDeck() {
