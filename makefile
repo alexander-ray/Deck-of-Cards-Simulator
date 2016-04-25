@@ -2,10 +2,10 @@ OBJS = DeckOfCards.o Helper.o main.o
 CXX = g++
 CXXFLAGS= -Wall -std=c++11
 
-all: target
+all: DeckOfCards
 
-target: $(OBJS)
-	$(CXX) $(OBJS) -o target
+DeckOfCards: $(OBJS)
+	$(CXX) $(OBJS) -o DeckOfCards
 
 DeckOfCards.o: DeckOfCards.cpp DeckOfCards.h
 	$(CXX) $(CXXFLAGS) -c DeckOfCards.cpp
@@ -18,4 +18,4 @@ Helper.o: Helper.h
 	$(CXX) $(CXXFLAGS) -c Helper.cpp
 
 clean:
-	rm *o target 
+	rm *o DeckOfCards 
