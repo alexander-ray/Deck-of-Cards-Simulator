@@ -2,6 +2,7 @@
 #define DECKOFCARDS_H
 #include <iostream>
 #include <sstream>
+#include <queue>
 
 using namespace std;
 
@@ -45,9 +46,11 @@ class DeckOfCards {
         Card* pickRandomCard();
         Card* pickCardFromPosition(int pos);
         Card* getCard(string name, string suit);
+        queue<Card*> dealCards(int i);
     private:
         int deckSize = 52;
         void buildDeck();
+        void shiftDeck();
         Card* deck[52];
 };
 

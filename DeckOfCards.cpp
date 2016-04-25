@@ -4,6 +4,7 @@
 #include <string>
 #include <random>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
@@ -22,18 +23,19 @@ void DeckOfCards::printDeck() {
     }
 }
 
-// Pick specified card
+// Pick card from specified position
 Card* DeckOfCards::pickCardFromPosition(int pos) {
     return deck[pos];
 }
 
-// Pick random card
+// Pick random card from the deck
 Card* DeckOfCards::pickRandomCard() {
     srand(time(NULL)); // Seeding rand()
     int randNum = rand()%(deckSize + 1); // Getting random number between 0 and 51
     return deck[randNum];
 }
 
+// Find card with specified name and suit
 Card* DeckOfCards::getCard(string n, string s) {
     for (int i = 0; i < deckSize; i++) {
         if (deck[i]->name == n && deck[i]->suit == s)
@@ -42,14 +44,38 @@ Card* DeckOfCards::getCard(string n, string s) {
     return NULL;
 }
 
+// Shuffle deck perfectly (non-realistic)
 void DeckOfCards::perfectShuffle() {
     random_shuffle(deck, deck+52);
 }
 
+void DeckOfCards::shiftDeck() {
+    Card *tmp[deckSize];
+    for (int i = 0; i < deckSize - 1; i++) {
+        tmp[i] = deck[i+1];
+    }
+    tmp[deckSize - 1] = deck[0];
+    for (int i = 0; i < deckSize; i++)
+        deck[i] = tmp[i];
+}
+
+// Deal specified number of cards from deck
+// Returns queue of cards
+queue<Card*> DeckOfCards::dealCards(int numCards) {
+    queue<Card*> tmp;
+    for (int i = 0; i < numCards; i++) {
+        tmp.push(deck[0]);
+        shiftDeck();
+    }
+    return tmp;
+}
+
+// Return deck to original state
 void DeckOfCards::rebuildDeck() {
+    // Delete everything in deck
     for (int i = 0; i < deckSize; i++)
         delete deck[i];
-    buildDeck();
+    buildDeck(); // Rebuild
 }
 
 // Build ordered Deck

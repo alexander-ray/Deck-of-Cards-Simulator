@@ -25,8 +25,9 @@ int main() {
         cout << "3. Pick random card" << endl;
         cout << "4. Choose card from specified position" << endl;
         cout << "5. Get specified card from deck" << endl;
-        cout << "6. Return deck to original state" << endl;
-        cout << "7. Quit" << endl;
+        cout << "6. Deal cards" << endl;
+        cout << "7. Return deck to original state" << endl;
+        cout << "8. Quit" << endl;
         cin >> input;
 
         if (input == 1) {
@@ -64,7 +65,8 @@ int main() {
             cout << "Please enter the name of the card" << endl;
             cin.ignore();
             getline(cin, name);
-            name = helper->toLowerCase(name);
+            name = helper->toLowerCase(name); // making input string lower case
+            name = helper->alphaToDigit(name); // Changing "one" to "1", etc
 
             cout << "Please enter the suit of the card" << endl;
             getline(cin, suit);
@@ -79,12 +81,38 @@ int main() {
                 cout << "Card not found!" << endl;
         }
         else if (input == 6) {
+            int num;
+            string numString;
+            cin.ignore();
+
+            // Input checking
+            while (true) {
+                cout << "Please enter the number of cards you'd like to deal (number between 1 and 52)" << endl;
+                cout << "Dealt cards will be pushed to the bottom of the deck" << endl;
+                getline(cin, numString);
+
+                num = atoi(numString.c_str()); // String to int
+                if (num > 0 && num < 53 && helper->isInt(numString))
+                    break;
+            }
+
+            queue<Card*> q = deck->dealCards(num);
+            Card *tmp;
+            int counter = 1;
+            while (!q.empty()) {
+                tmp = q.front();
+                q.pop();
+                cout << "Card number " << counter << " is " << tmp->name << " of " << tmp->suit << "s" << endl;
+                counter++;
+            }
+        }
+        else if (input == 7) {
             deck->rebuildDeck();
         }
         else
             cout << "Goodbye!" << endl;
     }
-    while (input != 7);
+    while (input != 8);
     return 0;
 }
 

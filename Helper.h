@@ -10,6 +10,7 @@ class Helper {
 		~Helper();
 		bool isInt(string s);
 		string toLowerCase(string s);
+		string alphaToDigit(string s);
 };
 
 #endif
