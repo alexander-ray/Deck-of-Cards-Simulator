@@ -5,22 +5,15 @@ Final Project--deck of cards simulation
 */
 
 #include "DeckOfCards.h"
+#include "helper.h"
 #include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
-// Checking if a string is composed of digits
-bool isInt (string s) {
-    for (int i = 0; i < s.length(); i++) {
-        if (!isdigit(s.at(i))) // Checking if char is a digit
-            return false;
-    }
-    return true;
-}
-
-
 int main() {
     DeckOfCards *deck = new DeckOfCards();
+    Helper *helper = new Helper();
 
     // Getting user input
     int input;
@@ -31,8 +24,9 @@ int main() {
         cout << "2. Perfectly shuffle deck" << endl;
         cout << "3. Pick random card" << endl;
         cout << "4. Choose card from specified position" << endl;
-        cout << "5. Return deck to original state" << endl;
-        cout << "6. Quit" << endl;
+        cout << "5. Get specified card from deck" << endl;
+        cout << "6. Return deck to original state" << endl;
+        cout << "7. Quit" << endl;
         cin >> input;
 
         if (input == 1) {
@@ -56,7 +50,7 @@ int main() {
                 getline(cin, posString);
 
                 pos = atoi(posString.c_str()); // String to int
-                if (pos > 0 && pos < 53 && isInt(posString))
+                if (pos > 0 && pos < 53 && helper->isInt(posString))
                     break;
             }
 
@@ -64,11 +58,33 @@ int main() {
             cout << "You picked: " << tmp->name << " of " << tmp->suit << "s!" << endl;
         }
         else if (input == 5) {
+            string name;
+            string suit;
+
+            cout << "Please enter the name of the card" << endl;
+            cin.ignore();
+            getline(cin, name);
+            name = helper->toLowerCase(name);
+
+            cout << "Please enter the suit of the card" << endl;
+            getline(cin, suit);
+            suit = helper->toLowerCase(suit);
+            cout << name << endl;
+            cout << suit << endl;
+
+            Card *tmp = deck->getCard(name, suit);
+            if (tmp != NULL)
+                cout << tmp->name << " of " << tmp->suit << "s was found!" << endl;
+            else
+                cout << "Card not found!" << endl;
+        }
+        else if (input == 6) {
             deck->rebuildDeck();
         }
         else
             cout << "Goodbye!" << endl;
     }
-    while (input != 6);
+    while (input != 7);
+    return 0;
 }
 

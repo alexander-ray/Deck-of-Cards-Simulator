@@ -34,6 +34,14 @@ Card* DeckOfCards::pickRandomCard() {
     return deck[randNum];
 }
 
+Card* DeckOfCards::getCard(string n, string s) {
+    for (int i = 0; i < deckSize; i++) {
+        if (deck[i]->name == n && deck[i]->suit == s)
+            return deck[i];
+    }
+    return NULL;
+}
+
 void DeckOfCards::perfectShuffle() {
     random_shuffle(deck, deck+52);
 }
