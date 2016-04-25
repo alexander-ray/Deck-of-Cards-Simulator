@@ -9,6 +9,7 @@ target: $(OBJS)
 
 DeckOfCards.o: DeckOfCards.cpp DeckOfCards.h
 	$(CXX) $(CXXFLAGS) -c DeckOfCards.cpp
+	chmod ugo+rx DeckOfCards.o
 
 main.o: main.cpp Helper.h DeckOfCards.h
 	$(CXX) $(CXXFLAGS) -c main.cpp
