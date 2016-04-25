@@ -51,6 +51,7 @@ class DeckOfCards {
         int deckSize = 52;
         void buildDeck();
         void shiftDeck();
+        void shiftDeckFromPosition(int i);
         Card* deck[52];
 };
 

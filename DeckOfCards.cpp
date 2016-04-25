@@ -25,23 +25,40 @@ void DeckOfCards::printDeck() {
 
 // Pick card from specified position
 Card* DeckOfCards::pickCardFromPosition(int pos) {
-    return deck[pos];
+    Card *tmp = deck[pos];
+    shiftDeckFromPosition(pos);
+    return tmp;
 }
 
 // Pick random card from the deck
 Card* DeckOfCards::pickRandomCard() {
     srand(time(NULL)); // Seeding rand()
     int randNum = rand()%(deckSize + 1); // Getting random number between 0 and 51
-    return deck[randNum];
+
+    Card *tmp = deck[randNum];
+    shiftDeckFromPosition(randNum);
+    return tmp;
 }
 
 // Find card with specified name and suit
 Card* DeckOfCards::getCard(string n, string s) {
-    for (int i = 0; i < deckSize; i++) {
-        if (deck[i]->name == n && deck[i]->suit == s)
-            return deck[i];
+    Card *tmp;
+    bool found = false;
+    int i;
+    for (i = 0; i < deckSize; i++) {
+        if (deck[i]->name == n && deck[i]->suit == s) {
+            found = true;
+            tmp = deck[i];
+            break;
+        }
     }
-    return NULL;
+
+    if (!found)
+        return NULL;
+    else {
+        shiftDeckFromPosition(i);
+        return tmp;
+    }
 }
 
 // Shuffle deck perfectly (non-realistic)
@@ -49,12 +66,31 @@ void DeckOfCards::perfectShuffle() {
     random_shuffle(deck, deck+52);
 }
 
+// First element of deck becomes last element
+// Deck shifts forward by 1
 void DeckOfCards::shiftDeck() {
     Card *tmp[deckSize];
     for (int i = 0; i < deckSize - 1; i++) {
         tmp[i] = deck[i+1];
     }
     tmp[deckSize - 1] = deck[0];
+    for (int i = 0; i < deckSize; i++)
+        deck[i] = tmp[i];
+}
+
+// Same as shiftDeck(), except deck[0] is replaced by deck[pos]
+void DeckOfCards::shiftDeckFromPosition(int pos) {
+    Card *tmp[deckSize];
+    // Copying deck up to position
+    for (int i = 0; i < pos; i++) {
+        tmp[i] = deck[i];
+    }
+    // Copying deck except deck[pos]
+    for (int i = pos; i < deckSize - 1; i++) {
+        tmp[i] = deck[i+1];
+    }
+    tmp[deckSize - 1] = deck[pos];
+    // Copying tmp to deck
     for (int i = 0; i < deckSize; i++)
         deck[i] = tmp[i];
 }
