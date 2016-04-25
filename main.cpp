@@ -5,7 +5,7 @@ Final Project--deck of cards simulation
 */
 
 #include "DeckOfCards.h"
-#include "helper.h"
+#include "Helper.h"
 #include <iostream>
 #include <stdio.h>
 
