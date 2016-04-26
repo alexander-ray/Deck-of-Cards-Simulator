@@ -5,6 +5,7 @@
 #include <random>
 #include <algorithm>
 #include <queue>
+#include <vector>
 
 using namespace std;
 
@@ -67,6 +68,8 @@ void DeckOfCards::perfectShuffle() {
 }
 
 // Simulates the classic riffle shuffle
+// Mixing top half of deck with bottom half of deck
+// A perfect riffle shuffle needs to have an unordered deck as a starting point
 void DeckOfCards::riffleShuffle() {
     Card *tmp[deckSize];
     int counter = 0;
@@ -79,6 +82,34 @@ void DeckOfCards::riffleShuffle() {
     // Copying tmp to deck
     for (int i = 0; i < deckSize; i++)
         deck[i] = tmp[i];
+}
+
+// Shuffles in a general "front of deck goes to back of deck"
+// Needs an unordered deck as starting point
+void DeckOfCards::overhandShuffle() {
+    std::vector<Card*> v;
+    int top = 26; // Top must be big to see switches from front to back
+    int cardRemainder = deckSize - top;
+    while (top > 0) {
+        while (cardRemainder > 0) {
+            
+            // Copy back of deck to front of v
+            for (int i = 0; i < cardRemainder; i++) { 
+                v.push_back(deck[i + top]); 
+            }
+            // Copy front of deck to back of v
+            for (int i = 0; i < top; i++) 
+                v.push_back(deck[i]);
+            // Copy v to deck
+            for (int j = 0; j < v.size(); j++) {
+                deck[j] = v.at(j);
+            }
+            v.clear();
+            cardRemainder = cardRemainder - top;
+        }
+        top--;
+        cardRemainder = deckSize - top;
+    }
 }
 
 // First element of deck becomes last element
