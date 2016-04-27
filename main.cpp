@@ -17,21 +17,29 @@ int main() {
 
     // Getting user input
     int input;
+    string inputStr;
 
     do {
-        cout << "======Main Menu======" << endl;
-        cout << "1. Print deck" << endl;
-        cout << "2. Perfectly shuffle deck" << endl;
-        cout << "3. Riffle shuffle" << endl;
-        cout << "4. Overhand shuffle" << endl;
-        cout << "5. Pick random card" << endl;
-        cout << "6. Choose card from specified position" << endl;
-        cout << "7. Get specified card from deck" << endl;
-        cout << "8. Deal cards" << endl;
-        cout << "9. Play some blackjack" << endl;
-        cout << "10. Return deck to original state" << endl;
-        cout << "11. Quit" << endl;
-        cin >> input;
+        // Input checking
+        while (true) {
+            cout << "======Main Menu======" << endl;
+            cout << "1. Print deck" << endl;
+            cout << "2. Perfectly shuffle deck" << endl;
+            cout << "3. Riffle shuffle" << endl;
+            cout << "4. Overhand shuffle" << endl;
+            cout << "5. Pick random card" << endl;
+            cout << "6. Choose card from specified position" << endl;
+            cout << "7. Get specified card from deck" << endl;
+            cout << "8. Deal cards" << endl;
+            cout << "9. Play some blackjack" << endl;
+            cout << "10. Return deck to original state" << endl;
+            cout << "11. Quit" << endl;
+            getline(cin, inputStr);
+
+            input = atoi(inputStr.c_str()); // String to int
+            if (input > 0 && input < 12 && helper->isInt(inputStr))
+                break;
+        }
 
         if (input == 1) {
             deck->printDeck();
@@ -123,6 +131,9 @@ int main() {
         }
         else if (input == 10) {
             deck->rebuildDeck();
+        }
+        else {
+
         }
     }
     while (input != 11);
