@@ -7,7 +7,7 @@ all: DeckOfCards
 DeckOfCards: $(OBJS)
 	$(CXX) $(OBJS) -o DeckOfCards
 
-DeckOfCards.o: DeckOfCards.cpp DeckOfCards.h
+DeckOfCards.o: DeckOfCards.cpp DeckOfCards.h Helper.h
 	$(CXX) $(CXXFLAGS) -c DeckOfCards.cpp
 	chmod ugo+rx DeckOfCards.o
 

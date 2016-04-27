@@ -28,8 +28,9 @@ int main() {
         cout << "6. Choose card from specified position" << endl;
         cout << "7. Get specified card from deck" << endl;
         cout << "8. Deal cards" << endl;
-        cout << "9. Return deck to original state" << endl;
-        cout << "10. Quit" << endl;
+        cout << "9. Play some blackjack" << endl;
+        cout << "10. Return deck to original state" << endl;
+        cout << "11. Quit" << endl;
         cin >> input;
 
         if (input == 1) {
@@ -115,9 +116,15 @@ int main() {
             }
         }
         else if (input == 9) {
+            cout << "In this blackjack game, ace will only count as 11 (tough luck if you bust on the deal)" << endl;
+            cout << "You (the player), starts with $200. Each round, you bet $10." << endl;
+            cout << "If you win, you gain $10. If you lose, you lose $10. If you draw (push), you don't exchange any money" << endl;
+            deck->blackjack();
+        }
+        else if (input == 10) {
             deck->rebuildDeck();
         }
     }
-    while (input != 10);
+    while (input != 11);
 }
 

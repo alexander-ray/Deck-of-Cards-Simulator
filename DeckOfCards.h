@@ -49,6 +49,7 @@ class DeckOfCards {
         Card* pickCardFromPosition(int pos);
         Card* getCard(string name, string suit);
         queue<Card*> dealCards(int i);
+        void blackjack();
     private:
         int deckSize = 52;
         void buildDeck();
