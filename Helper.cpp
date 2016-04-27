@@ -27,7 +27,7 @@ string Helper::toLowerCase(string s) {
 
 // Function to change "one" to "1", etc if applicable
 string Helper::alphaToDigit(string s) {
-	if (s == "twp")
+	if (s == "two")
 		return "2";
 	else if (s == "three")
 		return "3";
@@ -46,3 +46,19 @@ string Helper::alphaToDigit(string s) {
 	else 
 		return s;
 }
+
+// Change "diamonds" to "diamond"
+string Helper::suitPluralToSingular(string s) {
+	if (s == "diamonds")
+		return "diamond";
+	else if (s == "hearts")
+		return "heart";
+	else if (s == "clubs")
+		return "club";
+	else if (s == "spades")
+		return "spade";
+	else
+		return s;
+}
+
+

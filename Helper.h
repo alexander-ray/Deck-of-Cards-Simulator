@@ -11,6 +11,7 @@ class Helper {
 		bool isInt(string s);
 		string toLowerCase(string s);
 		string alphaToDigit(string s);
+		string suitPluralToSingular(string s);
 };
 
 #endif

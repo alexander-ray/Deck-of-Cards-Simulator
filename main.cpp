@@ -60,7 +60,6 @@ int main() {
         else if (input == 6) {
             int pos;
             string posString;
-            cin.ignore();
 
             // Input checking
             while (true) {
@@ -80,14 +79,16 @@ int main() {
             string suit;
 
             cout << "Please enter the name of the card" << endl;
-            cin.ignore();
+            //cin.ignore();
             getline(cin, name);
             name = helper->toLowerCase(name); // making input string lower case
             name = helper->alphaToDigit(name); // Changing "one" to "1", etc
 
             cout << "Please enter the suit of the card" << endl;
+            //cin.ignore();
             getline(cin, suit);
             suit = helper->toLowerCase(suit);
+            suit = helper->suitPluralToSingular(suit);
             cout << name << endl;
             cout << suit << endl;
 
@@ -100,7 +101,6 @@ int main() {
         else if (input == 8) {
             int num;
             string numString;
-            cin.ignore();
 
             // Input checking
             while (true) {
