@@ -21,3 +21,4 @@ The reason for using an array is that the deck of cards itself is a static size 
 + It would be best if the card inputs would *only* allow names and suits of cards
 + Some lines are obnoxiously long
 + The "print deck" output is unwieldy, making it so everything fits on one page would be ideal
++ Allowing for the ace to be 1 or 11 in blackjack would be a great improvement
