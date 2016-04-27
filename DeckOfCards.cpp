@@ -158,7 +158,7 @@ queue<Card*> DeckOfCards::dealCards(int numCards) {
 void DeckOfCards::blackjack() {
     int bet = 200;
     int keepPlaying = true;
-
+    cin.ignore();
     while (bet > 0 && keepPlaying) {
         std::vector<Card*> playerHand;
         std::vector<Card*> dealerHand;
@@ -198,7 +198,7 @@ void DeckOfCards::blackjack() {
 
         // Letting player build hand
         int input;
-        cin.ignore();
+        //cin.ignore();
         do {
             // Input checking
             string inputStr;
@@ -221,7 +221,7 @@ void DeckOfCards::blackjack() {
                     cout << playerHand.at(i)->name << " of " << playerHand.at(i)->suit << "s | ";
                 cout << playerHand.at(playerHand.size() - 1)->name << " of " << playerHand.at(playerHand.size() - 1)->suit << "s" << endl;
                 playerCardWeight += playerHand.at(playerHand.size() - 1)->weight;
-                cout << "Player card weight is: " << playerCardWeight << endl;
+                
                 // Checking if player busted or got blackjack
                 if (playerCardWeight > 21) {
                     playerBusted = true;
