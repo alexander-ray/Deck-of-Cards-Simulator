@@ -159,7 +159,7 @@ queue<Card*> DeckOfCards::dealCards(int numCards) {
 void DeckOfCards::blackjack() {
     int bet = 200;
     int keepPlaying = true;
-    cin.ignore();
+    //cin.ignore();
 
     // While there is still money && you want to continue playing
     while (bet > 0 && keepPlaying) {
