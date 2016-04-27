@@ -20,7 +20,7 @@ bool Helper::isInt (string s) {
 // String.tolower
 string Helper::toLowerCase(string s) {
 	for (int i = 0; i < s.length(); i++) {
-		s[i] = tolower(s.at(i));
+		s[i] = tolower(s.at(i)); // Changing each char to lowercase
 	}
 	return s;
 }

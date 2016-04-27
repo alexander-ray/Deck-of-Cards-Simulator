@@ -79,16 +79,14 @@ int main() {
             string suit;
 
             cout << "Please enter the name of the card" << endl;
-            //cin.ignore();
             getline(cin, name);
             name = helper->toLowerCase(name); // making input string lower case
             name = helper->alphaToDigit(name); // Changing "one" to "1", etc
 
             cout << "Please enter the suit of the card" << endl;
-            //cin.ignore();
             getline(cin, suit);
             suit = helper->toLowerCase(suit);
-            suit = helper->suitPluralToSingular(suit);
+            suit = helper->suitPluralToSingular(suit); // e.g. changing "diamonds" to "diamond"
             cout << name << endl;
             cout << suit << endl;
 
@@ -113,10 +111,10 @@ int main() {
                     break;
             }
 
-            queue<Card*> q = deck->dealCards(num);
+            queue<Card*> q = deck->dealCards(num); // Queue of dealt cards
             Card *tmp;
             int counter = 1;
-            while (!q.empty()) {
+            while (!q.empty()) { // Iterate through queue printing everything
                 tmp = q.front();
                 q.pop();
                 cout << "Card number " << counter << " is " << tmp->name << " of " << tmp->suit << "s" << endl;
@@ -131,9 +129,6 @@ int main() {
         }
         else if (input == 10) {
             deck->rebuildDeck();
-        }
-        else {
-
         }
     }
     while (input != 11);

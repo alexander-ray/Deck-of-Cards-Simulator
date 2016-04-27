@@ -30,7 +30,7 @@ void DeckOfCards::printDeck() {
 // Pick card from specified position
 Card* DeckOfCards::pickCardFromPosition(int pos) {
     Card *tmp = deck[pos];
-    shiftDeckFromPosition(pos);
+    shiftDeckFromPosition(pos); // Put chosen card at back of deck
     return tmp;
 }
 
@@ -40,7 +40,7 @@ Card* DeckOfCards::pickRandomCard() {
     int randNum = rand()%(deckSize + 1); // Getting random number between 0 and 51
 
     Card *tmp = deck[randNum];
-    shiftDeckFromPosition(randNum);
+    shiftDeckFromPosition(randNum); // Put chosen card at bottom of deck
     return tmp;
 }
 
@@ -49,14 +49,14 @@ Card* DeckOfCards::getCard(string n, string s) {
     Card *tmp;
     bool found = false;
     int i;
-    for (i = 0; i < deckSize; i++) {
-        if (deck[i]->name == n && deck[i]->suit == s) {
+    for (i = 0; i < deckSize; i++) { // Iterating through deck
+        if (deck[i]->name == n && deck[i]->suit == s) { // If both name and suit match
             found = true;
             tmp = deck[i];
             break;
         }
     }
-
+    // Return null if not found
     if (!found)
         return NULL;
     else {
@@ -67,13 +67,13 @@ Card* DeckOfCards::getCard(string n, string s) {
 
 // Shuffle deck perfectly (non-realistic)
 void DeckOfCards::perfectShuffle() {
-    srand(time(NULL));
-    random_shuffle(deck, deck+52);
+    srand(time(NULL)); // Seeding rand() with time
+    random_shuffle(deck, deck+52); // Shuffle the deck
 }
 
 // Simulates the classic riffle shuffle
 // Mixing top half of deck with bottom half of deck
-// A perfect riffle shuffle needs to have an unordered deck as a starting point
+// A perfect riffle shuffle needs to have an unordered deck as a starting point to ensure that resulting order isn't predictable
 void DeckOfCards::riffleShuffle() {
     Card *tmp[deckSize];
     int counter = 0;
@@ -89,9 +89,9 @@ void DeckOfCards::riffleShuffle() {
 }
 
 // Shuffles in a general "front of deck goes to back of deck"
-// Needs an unordered deck as starting point
+// Needs an unordered deck as starting point to ensure resulting order isn't predictable
 void DeckOfCards::overhandShuffle() {
-    std::vector<Card*> v;
+    std::vector<Card*> v; // Vector to hold cards
     int top = 26; // Top must be big to see switches from front to back
     int cardRemainder = deckSize - top;
     while (top > 0) {
@@ -131,13 +131,13 @@ void DeckOfCards::shiftDeck() {
 void DeckOfCards::shiftDeckFromPosition(int pos) {
     Card *tmp[deckSize];
     // Copying deck up to position
-    for (int i = 0; i < pos; i++) {
+    for (int i = 0; i < pos; i++) 
         tmp[i] = deck[i];
-    }
+    
     // Copying deck except deck[pos]
-    for (int i = pos; i < deckSize - 1; i++) {
+    for (int i = pos; i < deckSize - 1; i++) 
         tmp[i] = deck[i+1];
-    }
+
     tmp[deckSize - 1] = deck[pos];
     // Copying tmp to deck
     for (int i = 0; i < deckSize; i++)
@@ -147,7 +147,7 @@ void DeckOfCards::shiftDeckFromPosition(int pos) {
 // Deal specified number of cards from deck
 // Returns queue of cards
 queue<Card*> DeckOfCards::dealCards(int numCards) {
-    queue<Card*> tmp;
+    queue<Card*> tmp; // Queue to ensure order of cards stays
     for (int i = 0; i < numCards; i++) {
         tmp.push(deck[0]);
         shiftDeck();
@@ -155,12 +155,16 @@ queue<Card*> DeckOfCards::dealCards(int numCards) {
     return tmp;
 }
 
+// Full blackjack game
 void DeckOfCards::blackjack() {
     int bet = 200;
     int keepPlaying = true;
     cin.ignore();
+
+    // While there is still money && you want to continue playing
     while (bet > 0 && keepPlaying) {
-        std::vector<Card*> playerHand;
+        // Vectors to hold hands
+        std::vector<Card*> playerHand; 
         std::vector<Card*> dealerHand;
         int currentIndex = 0;
         bool playerBlackjack = false;
@@ -198,7 +202,6 @@ void DeckOfCards::blackjack() {
 
         // Letting player build hand
         int input;
-        //cin.ignore();
         do {
             // Input checking
             string inputStr;
@@ -229,6 +232,7 @@ void DeckOfCards::blackjack() {
                     bet -= 10;
                     break;
                 }
+                // If blackjack, don't continue with options
                 else if (playerCardWeight == 21) {
                     playerBlackjack = true;                
                     break;
@@ -237,6 +241,7 @@ void DeckOfCards::blackjack() {
         }
         while(input != 2);
 
+        // If player's cards aren't above 21
         if (!playerBusted) {
             // Revealing dealer's hand
             cout << "Dealer cards: " << dealerHand.at(0)->name << " of " << dealerHand.at(0)->suit << "s | ";
@@ -251,6 +256,7 @@ void DeckOfCards::blackjack() {
             }
 
             // Letting dealer build hand
+            // Dealer builds hand according to normal casino rules
             while (dealerCardWeight < 17) {
                 cout << "Dealer chose to hit" << endl;
                 dealerHand.push_back(deck[currentIndex]);
